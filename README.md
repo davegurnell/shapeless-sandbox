@@ -9,6 +9,8 @@ case class Talk(name: String, speaker: Person)
 val dave = Person("Dave", 37)
 val talk = Talk("Shapeless Workshop", dave)
 
+
+
 sealed trait Tree
 final case class Branch(items: List[Tree]) extends Tree
 final case class Leaf(value: String) extends Tree
@@ -33,7 +35,7 @@ implicit val personTreeWriter = new TreeWriter[Person] {
 implicit val talkTreeWriter = new TreeWriter[Talk] {
   def write(t: Talk) = Branch(List(
     Leaf("Talk"),
-    TreeWriter.write(t.name)
+    TreeWriter.write(t.speaker)
   ))
 }
 ~~~
